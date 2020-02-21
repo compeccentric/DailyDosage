@@ -1,0 +1,11 @@
+﻿@model DailyDosage.ViewModels.EditMedicationViewModel
+
+<h1>Edit Medication</h1>
+<form asp-controller="Home" asp-action="Edit" method="post">
+    <input hidden asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+</form>

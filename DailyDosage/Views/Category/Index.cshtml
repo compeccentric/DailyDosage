@@ -1,0 +1,12 @@
+﻿@model List<DailyDosage.Models.MedicationCategory>
+
+<h1>Categories</h1>
+<ul>
+    @foreach (var category in Model)
+    {
+        <li>@category.Name</li>
+    }
+
+
+</ul>
+<p><a asp-controller="Category" asp-action="Add">Add Category</a>&nbsp;&nbsp;<a asp-controller="Category" asp-action="Remove">Remove Category</a></p>

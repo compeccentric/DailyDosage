@@ -1,0 +1,111 @@
+﻿
+
+
+<h1>Calendar</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="table-primary" scope="col">Monday</th>
+            <th class="table-secondary" scope="col">Tuesday</th>
+            <th class="table-primary" scope="col">Wednesday</th>
+            <th class="table-secondary" scope="col">Thursday</th>
+            <th class="table-primary" scope="col">Friday</th>
+            <th class="table-secondary" scope="col">Saturday</th>
+            <th class="table-primary" scope="col">Sunday</th>
+        </tr>
+    </thead>
+    <thead>
+        <tr>
+            <th class="table-primary" scope="col">Morning</th>
+            <th class="table-secondary" scope="col">Morning</th>
+            <th class="table-primary" scope="col">Morning</th>
+            <th class="table-secondary" scope="col">Morning</th>
+            <th class="table-primary" scope="col">Morning</th>
+            <th class="table-secondary" scope="col">Morning</th>
+            <th class="table-primary" scope="col">Morning</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <ul>
+                    @foreach (var mondayMorn in ViewBag.MondayMorns)
+                    {
+                        <li>@mondayMorn.Name&nbsp;@mondayMorn.Dosage</li>
+                    }
+                </ul>
+
+            </td>
+            <td>
+                
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th class="table-primary" scope="col">Afternoon</th>
+            <th class="table-secondary" scope="col">Afternoon</th>
+            <th class="table-primary" scope="col">Afternoon</th>
+            <th class="table-secondary" scope="col">Afternoon</th>
+            <th class="table-primary" scope="col">Afternoon</th>
+            <th class="table-secondary" scope="col">Afternoon</th>
+            <th class="table-primary" scope="col">Afternoon</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <ul>
+                    @foreach (var mondayAfter in ViewBag.MondayAfters)
+                    {
+                        <li>@mondayAfter.Name&nbsp;@mondayAfter.Dosage</li>
+                    }
+                </ul>
+
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th class="table-primary" scope="col">Evening</th>
+            <th class="table-secondary" scope="col">Evening</th>
+            <th class="table-primary" scope="col">Evening</th>
+            <th class="table-secondary" scope="col">Evening</th>
+            <th class="table-primary" scope="col">Evening</th>
+            <th class="table-secondary" scope="col">Evening</th>
+            <th class="table-primary" scope="col">Evening</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <ul>
+                    @foreach (var mondayEve in ViewBag.MondayEves)
+                    {
+                        <li>@mondayEve.Name&nbsp;@mondayEve.Dosage</li>
+                    }
+                </ul>
+
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+

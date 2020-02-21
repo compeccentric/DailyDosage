@@ -1,0 +1,13 @@
+﻿@model List<DailyDosage.Models.Medication>
+
+
+<h1>Remove Medication</h1>
+<form method="post">
+    @foreach (var medication in Model)
+    {
+        <input type="checkbox" name="medicationIds" id="@medication.ID" value="@medication.ID" />
+        <label for="@medication.ID">@medication.Name</label><br />
+    }
+    <input type="submit" value="Remove Selected Medication(s)" />
+</form>
+

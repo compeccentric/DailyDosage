@@ -1,0 +1,106 @@
+﻿@model DailyDosage.ViewModels.AddMedicationViewModel
+@inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> userManager;
+
+<h1>Add Medication</h1>
+<form enctype="multipart/form-data" asp-controller="Medication" asp-action="Add" method="post">
+    @if (signInManager.IsSignedIn(User))
+    {
+        // Get the current logged in user
+        Task<ApplicationUser> GetCurrentUserAsync() => userManager.GetUserAsync(User);
+
+        var user = await GetCurrentUserAsync();
+        var Id = user.Id;
+
+        <input asp-for="AccountId" type="hidden" value="@Id">
+
+    }
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input class="form-control" asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input asp-for="Photo" class="form-control custom-file-input">
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Category"></label>
+        <select asp-for="Category" asp-items="Model.Categories"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dosage"></label>
+        <input class="form-control" asp-for="Dosage" />
+
+    </div>
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Monday</th>
+                    <th scope="col">Tuesday</th>
+                    <th scope="col">Wednesday</th>
+                    <th scope="col">Thursday</th>
+                    <th scope="col">Friday</th>
+                    <th scope="col">Saturday</th>
+                    <th scope="col">Sunday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("MondayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("TuesdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("WednesdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("ThursdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("FridayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("SaturdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("SundayMorn", false)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("MondayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("TuesdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("WednesdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("ThursdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("FridayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("SaturdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("SundayAfter", false)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("MondayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("TuesdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("WednesdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("ThursdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("FridayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("SaturdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("SundayEve", false)</td>
+                </tr>
+            </tbody>
+        </table>
+        @*@Html.Label("Monday Morning")
+            @Html.CheckBox("MondayMorn", false)*@
+    </div>
+    <input type="submit" value="Add Medication" />
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                })
+            });
+        </script>
+    }
+</form>
+
