@@ -11,6 +11,10 @@ namespace DailyDosage.ViewModels
     {
         public Medication Medication { get; set; }
         public int Id { get; set; }
+
+       
+
+
         
     }
 }

@@ -37,7 +37,13 @@
 
             </td>
             <td>
-                
+                <ul>
+                    @foreach (var tuesdayMorn in ViewBag.TuesdayMorns)
+                    {
+                        <li>@tuesdayMorn.Name&nbsp;@tuesdayMorn.Dosage</li>
+                    }
+                </ul>
+
             </td>
             <td></td>
             <td></td>
@@ -68,7 +74,14 @@
                 </ul>
 
             </td>
-            <td></td>
+            <td>
+                <ul>
+                    @foreach (var tuesdayAfter in ViewBag.TuesdayAfters)
+                    {
+                        <li>@tuesdayAfter.Name&nbsp;@tuesdayAfter.Dosage</li>
+                    }
+                </ul>
+            </td>
             <td></td>
             <td></td>
             <td></td>

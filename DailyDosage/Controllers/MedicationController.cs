@@ -45,6 +45,8 @@ namespace DailyDosage.Controllers
                               select m;
             ViewBag.AccountMeds = AccountMeds;
             
+           
+
             return View();
         }
         public ViewResult Edit(int id)
@@ -66,6 +68,9 @@ namespace DailyDosage.Controllers
                 Medication = medication,
                 Id = medication.ID,
                 Name = medication.Name,
+                Dosage = medication.Dosage,
+                CategoryName = medication.CategoryName,
+                Description = medication.Description
                
               
 
@@ -91,37 +96,37 @@ namespace DailyDosage.Controllers
                     model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
 
-                MedicationCategory newMedicationCategory = context.Categories.Single(c => c.ID == model.Category);
+                //MedicationCategory newMedicationCategory = context.Categories.Single(c => c.ID == model.Category);
                 Medication newMedication = new Medication
                 {
                     Name = model.Name,
                     Description = model.Description,
                     PhotoPath = uniqueFileName,
-                    Category = newMedicationCategory,
+                    CategoryName = model.CategoryName,
                     AccountId = model.AccountId,
 
-                    //Dosage = addMedicationViewModel.Dosage,
-                    //MondayMorn = addMedicationViewModel.MondayMorn,
-                    //MondayAfter = addMedicationViewModel.MondayAfter,
-                    //MondayEve = addMedicationViewModel.MondayEve,
-                    //TuesdayMorn = addMedicationViewModel.TuesdayMorn,
-                    //TuesdayAfter = addMedicationViewModel.TuesdayAfter,
-                    //TuesdayEve = addMedicationViewModel.TuesdayEve,
-                    //WednesdayMorn = addMedicationViewModel.WednesdayMorn,
-                    //WednesdayAfter = addMedicationViewModel.WednesdayAfter,
-                    //WednesdayEve = addMedicationViewModel.WednesdayEve,
-                    //ThursdayMorn = addMedicationViewModel.ThursdayMorn,
-                    //ThursdayAfter = addMedicationViewModel.ThursdayAfter,
-                    //ThursdayEve = addMedicationViewModel.ThursdayEve,
-                    //FridayMorn = addMedicationViewModel.FridayMorn,
-                    //FridayAfter = addMedicationViewModel.FridayAfter,
-                    //FridayEve = addMedicationViewModel.FridayEve,
-                    //SaturdayMorn = addMedicationViewModel.SaturdayMorn,
-                    //SaturdayAfter = addMedicationViewModel.SaturdayAfter,
-                    //SaturdayEve = addMedicationViewModel.SaturdayEve,
-                    //SundayMorn = addMedicationViewModel.SundayMorn,
-                    //SundayAfter = addMedicationViewModel.SundayAfter,
-                    //SundayEve = addMedicationViewModel.SundayEve,
+                    Dosage = model.Dosage,
+                    MondayMorn = model.MondayMorn,
+                    MondayAfter = model.MondayAfter,
+                    MondayEve = model.MondayEve,
+                    TuesdayMorn = model.TuesdayMorn,
+                    TuesdayAfter = model.TuesdayAfter,
+                    TuesdayEve = model.TuesdayEve,
+                    WednesdayMorn = model.WednesdayMorn,
+                    WednesdayAfter = model.WednesdayAfter,
+                    WednesdayEve = model.WednesdayEve,
+                    ThursdayMorn = model.ThursdayMorn,
+                    ThursdayAfter = model.ThursdayAfter,
+                    ThursdayEve = model.ThursdayEve,
+                    FridayMorn = model.FridayMorn,
+                    FridayAfter = model.FridayAfter,
+                    FridayEve = model.FridayEve,
+                    SaturdayMorn = model.SaturdayMorn,
+                    SaturdayAfter = model.SaturdayAfter,
+                    SaturdayEve = model.SaturdayEve,
+                    SundayMorn = model.SundayMorn,
+                    SundayAfter = model.SundayAfter,
+                    SundayEve = model.SundayEve
 
                 };
                 context.Medications.Add(newMedication);
@@ -150,7 +155,17 @@ namespace DailyDosage.Controllers
             context.SaveChanges();
             return Redirect("/Medication");
         }
+        [HttpPost]
+        public IActionResult delete(int medicationIds)
+        {
+            
+            
+                Medication theMedication = context.Medications.Single(c => c.ID == medicationIds);
+                context.Medications.Remove(theMedication);
+            
+            context.SaveChanges();
+            return Redirect("/Medication");
+        }
 
-       
     }
 }

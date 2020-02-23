@@ -19,8 +19,6 @@ namespace DailyDosage.Controllers
         }
         public IActionResult Index()
         {
-            //IList<Medication> medications = context.Medications.ToList();
-            //return View(medications);
             var mondayMorns = from m in context.Medications
                               where m.MondayMorn == true
                               select m;
@@ -34,6 +32,18 @@ namespace DailyDosage.Controllers
             ViewBag.MondayAfters = mondayAfters;
             ViewBag.MondayEves = mondayEves;
 
+            var tuesdayMorns = from m in context.Medications
+                              where m.MondayMorn == true
+                              select m;
+            var tuesdayAfters = from m in context.Medications
+                               where m.MondayAfter == true
+                               select m;
+            var tuesdayEves = from m in context.Medications
+                             where m.MondayEve == true
+                             select m;
+            ViewBag.TuesdayMorns = tuesdayMorns;
+            ViewBag.TuesdayAfters = tuesdayAfters;
+            ViewBag.TuesdayEves = tuesdayEves;
             return View();
 
 

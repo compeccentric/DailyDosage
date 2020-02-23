@@ -14,7 +14,8 @@ namespace DailyDosage.Models
         public string AccountId { get; set; }
         public int Dosage { get; set; }
         public MedicationCategory Category { get; set; }
-        public int CategoryID { get; set; }
+        //public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
         public bool MondayMorn { get; set; }
         public bool MondayAfter { get; set; }
         public bool MondayEve { get; set; }

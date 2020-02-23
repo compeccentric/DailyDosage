@@ -20,7 +20,7 @@ namespace DailyDosage.ViewModels
         public IFormFile Photo { get; set; }
         [Required]
         [Display(Name = "Category")]
-        public int Category { get; set; }
+        public string CategoryName { get; set; }
         public int Dosage { get; set; }
         public bool MondayMorn { get; set; }
         public bool MondayAfter { get; set; }
@@ -52,7 +52,7 @@ namespace DailyDosage.ViewModels
             {
                 Categories.Add(new SelectListItem
                 {
-                    Value = category.ID.ToString(),
+                    Value = category.Name,
                     Text = category.Name
                 });
 
