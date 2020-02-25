@@ -49,17 +49,7 @@ namespace DailyDosage.Controllers
 
             return View();
         }
-        public ViewResult Edit(int id)
-        {
-            Medication medication = _medicationRepository.GetMedication(id);
-            EditMedicationViewModel editMedicationViewModel = new EditMedicationViewModel
-            {
-                Id = medication.ID,
-                Name = medication.Name,
-
-            };
-            return View(editMedicationViewModel);
-        }
+        
         public ViewResult Details(int id)
         {
             Medication medication = _medicationRepository.GetMedication(id);
@@ -70,13 +60,15 @@ namespace DailyDosage.Controllers
                 Name = medication.Name,
                 Dosage = medication.Dosage,
                 CategoryName = medication.CategoryName,
-                Description = medication.Description
-               
-              
+                Description = medication.Description,
+                
+
+
 
             };
             return View(detailsMedicationViewModel);
         }
+        
         public IActionResult Add()
         {
             AddMedicationViewModel addMedicationViewModel = new AddMedicationViewModel(context.Categories.ToList());
@@ -87,14 +79,7 @@ namespace DailyDosage.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = null;
-                if (model.Photo != null)
-                {
-                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
+                string uniqueFileName = ProcessUploadedFile(model);
 
                 //MedicationCategory newMedicationCategory = context.Categories.Single(c => c.ID == model.Category);
                 Medication newMedication = new Medication
@@ -138,34 +123,130 @@ namespace DailyDosage.Controllers
             
         }
 
-        public IActionResult Remove() 
+        //public IActionResult Remove() 
+        //{
+        //    IList<Medication> medications = context.Medications.ToList();
+        //    return View(medications);
+        //}
+
+        //[HttpPost]
+        //public IActionResult Remove(int[] medicationIds)
+        //{
+        //    foreach (int medicationId in medicationIds)
+        //    {
+        //        Medication theMedication = context.Medications.Single(c => c.ID == medicationId);
+        //        context.Medications.Remove(theMedication);
+        //    }
+        //    context.SaveChanges();
+        //    return Redirect("/Medication");
+        //}
+        //[HttpPost]
+        public async Task<IActionResult>  Delete(int id)
         {
-            IList<Medication> medications = context.Medications.ToList();
-            return View(medications);
+            var medication = await context.Medications.FindAsync(id);
+            context.Medications.Remove(medication);
+            await context.SaveChangesAsync();
+            return RedirectToAction("Index");
+
+            //Medication theMedication = context.Medications.Single(c => c.ID == medicationId);
+            //    context.Medications.Remove(theMedication);
+
+            //context.SaveChanges();
+            //return Redirect("Medication");
+        }
+
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            //Medication medication = _medicationRepository.GetMedication(id);
+            //EditMedicationViewModel editMedicationViewModel = new EditMedicationViewModel
+
+            Medication medication = context.Medications.Find(id);
+            EditMedicationViewModel editMedicationViewModel = new EditMedicationViewModel
+            {
+                Id = medication.ID,
+                Name = medication.Name,
+                Description = medication.Description,
+                Dosage = medication.Dosage,
+                CategoryName = medication.CategoryName,
+                ExistingPhotoPath = medication.PhotoPath
+            };
+            return View(editMedicationViewModel);
         }
 
         [HttpPost]
-        public IActionResult Remove(int[] medicationIds)
+        public IActionResult Edit(EditMedicationViewModel model)
         {
-            foreach (int medicationId in medicationIds)
+            if (ModelState.IsValid)
             {
-                Medication theMedication = context.Medications.Single(c => c.ID == medicationId);
-                context.Medications.Remove(theMedication);
+
+                //Medication medication = _medicationRepository.GetMedication(model.Id);
+                
+                Medication medication = context.Medications.Find(model.Id);
+                medication.Name = model.Name;
+                medication.Description = model.Description;
+                medication.CategoryName = model.CategoryName;
+                
+                medication.Dosage = model.Dosage;
+                medication.MondayMorn = model.MondayMorn;
+                medication.MondayAfter = model.MondayAfter;
+                medication.MondayEve = model.MondayEve;
+                medication.TuesdayMorn = model.TuesdayMorn;
+                medication.TuesdayAfter = model.TuesdayAfter;
+                medication.TuesdayEve = model.TuesdayEve;
+                medication.WednesdayMorn = model.WednesdayMorn;
+                medication.WednesdayAfter = model.WednesdayAfter;
+                medication.WednesdayEve = model.WednesdayEve;
+                medication.ThursdayMorn = model.ThursdayMorn;
+                medication.ThursdayAfter = model.ThursdayAfter;
+                medication.ThursdayEve = model.ThursdayEve;
+                medication.FridayMorn = model.FridayMorn;
+                medication.FridayAfter = model.FridayAfter;
+                medication.FridayEve = model.FridayEve;
+                medication.SaturdayMorn = model.SaturdayMorn;
+                medication.SaturdayAfter = model.SaturdayAfter;
+                medication.SaturdayEve = model.SaturdayEve;
+                medication.SundayMorn = model.SundayMorn;
+                medication.SundayAfter = model.SundayAfter;
+                medication.SundayEve = model.SundayEve;
+
+                if (model.Photo != null)
+                {
+                    if (model.ExistingPhotoPath != null)
+                    {
+                        string filePath = Path.Combine(hostingEnvironment.WebRootPath, "images", model.ExistingPhotoPath);
+                        System.IO.File.Delete(filePath);
+                    }
+                    medication.PhotoPath = ProcessUploadedFile(model);
+                }
+
+
+                context.Medications.Update(medication);
+                context.SaveChanges();
+                return RedirectToAction("index");
+
+                
             }
-            context.SaveChanges();
-            return Redirect("/Medication");
+            return View(model);
         }
-        [HttpPost]
-        public IActionResult delete(int medicationIds)
+        private string ProcessUploadedFile(AddMedicationViewModel model)
         {
-            
-            
-                Medication theMedication = context.Medications.Single(c => c.ID == medicationIds);
-                context.Medications.Remove(theMedication);
-            
-            context.SaveChanges();
-            return Redirect("/Medication");
+            string uniqueFileName = null;
+
+            if (model.Photo != null)
+            {
+                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Photo.CopyTo(fileStream);
+                }
+            }
+
+            return uniqueFileName;
         }
 
     }
+
 }

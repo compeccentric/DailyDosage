@@ -34,7 +34,6 @@
                         <li>@mondayMorn.Name&nbsp;@mondayMorn.Dosage</li>
                     }
                 </ul>
-
             </td>
             <td>
                 <ul>
@@ -43,13 +42,47 @@
                         <li>@tuesdayMorn.Name&nbsp;@tuesdayMorn.Dosage</li>
                     }
                 </ul>
-
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                <ul>
+                    @foreach (var wednesdayMorn in ViewBag.WednesdayMorns)
+                    {
+                        <li>@wednesdayMorn.Name&nbsp;@wednesdayMorn.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var thursdayMorn in ViewBag.ThursdayMorns)
+                    {
+                        <li>@thursdayMorn.Name&nbsp;@thursdayMorn.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var fridayMorn in ViewBag.FridayMorns)
+                    {
+                        <li>@fridayMorn.Name&nbsp;@fridayMorn.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var saturdayMorn in ViewBag.SaturdayMorns)
+                    {
+                        <li>@saturdayMorn.Name&nbsp;@saturdayMorn.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var sundayMorn in ViewBag.SundayMorns)
+                    {
+                        <li>@sundayMorn.Name&nbsp;@sundayMorn.Dosage</li>
+                    }
+                </ul>
+            </td>
         </tr>
     </tbody>
     <thead>
@@ -82,11 +115,46 @@
                     }
                 </ul>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                <ul>
+                    @foreach (var wednesdayAfter in ViewBag.WednesdayAfters)
+                    {
+                        <li>@wednesdayAfter.Name&nbsp;@wednesdayAfter.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var thursdayAfter in ViewBag.ThursdayAfters)
+                    {
+                        <li>@thursdayAfter.Name&nbsp;@thursdayAfter.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var fridayAfter in ViewBag.FridayAfters)
+                    {
+                        <li>@fridayAfter.Name&nbsp;@fridayAfter.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var saturdayAfter in ViewBag.SaturdayAfters)
+                    {
+                        <li>@saturdayAfter.Name&nbsp;@saturdayAfter.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var sundayAfter in ViewBag.SundayAfters)
+                    {
+                        <li>@sundayAfter.Name&nbsp;@sundayAfter.Dosage</li>
+                    }
+                </ul>
+            </td>
         </tr>
     </tbody>
     <thead>
@@ -109,14 +177,55 @@
                         <li>@mondayEve.Name&nbsp;@mondayEve.Dosage</li>
                     }
                 </ul>
-
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                <ul>
+                    @foreach (var tuesdayEve in ViewBag.TuesdayEves)
+                    {
+                        <li>@tuesdayEve.Name&nbsp;@tuesdayEve.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var wednesdayEve in ViewBag.WednesdayEves)
+                    {
+                        <li>@wednesdayEve.Name&nbsp;@wednesdayEve.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var thursdayEve in ViewBag.ThursdayEves)
+                    {
+                        <li>@thursdayEve.Name&nbsp;@thursdayEve.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var fridayEve in ViewBag.FridayEves)
+                    {
+                        <li>@fridayEve.Name&nbsp;@fridayEve.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var saturdayEve in ViewBag.SaturdayEves)
+                    {
+                        <li>@saturdayEve.Name&nbsp;@saturdayEve.Dosage</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach (var sundayEve in ViewBag.SundayEves)
+                    {
+                        <li>@sundayEve.Name&nbsp;@sundayEve.Dosage</li>
+                    }
+                </ul>
+            </td>
         </tr>
     </tbody>
 </table>

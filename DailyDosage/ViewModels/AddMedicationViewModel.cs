@@ -14,11 +14,11 @@ namespace DailyDosage.ViewModels
         [Required]
         [Display(Name= "Medication Name")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "You must give your medication a description")]
+   
         public string AccountId { get; set; }
         public string Description { get; set; }
         public IFormFile Photo { get; set; }
-        [Required]
+        
         [Display(Name = "Category")]
         public string CategoryName { get; set; }
         public int Dosage { get; set; }
@@ -43,6 +43,7 @@ namespace DailyDosage.ViewModels
         public bool SundayMorn { get; set; }
         public bool SundayAfter { get; set; }
         public bool SundayEve { get; set; }
+
         public List<SelectListItem> Categories { get; set; }
         public AddMedicationViewModel(IEnumerable<MedicationCategory> categories)
         {

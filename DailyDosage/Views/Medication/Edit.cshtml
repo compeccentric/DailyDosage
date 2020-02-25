@@ -1,11 +1,114 @@
 ﻿@model DailyDosage.ViewModels.EditMedicationViewModel
+@{
 
+    var photoPath = "~/images/" + (Model.ExistingPhotoPath);
+
+}
 <h1>Edit Medication</h1>
-<form asp-controller="Home" asp-action="Edit" method="post">
+
+<form asp-controller="Medication" asp-action="Edit" enctype="multipart/form-data" method="post" class="mt-3">
+    <div asp-validation-summary="All" class="text-danger">
+    </div>
     <input hidden asp-for="Id" />
+    <input hidden asp-for="ExistingPhotoPath" />
+
+
     <div class="form-group">
         <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input class="form-control" asp-for="Description" placeholder="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+    @*<div class="form-group row">
+        <label asp-for="CategoryName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="CategoryName" class="custom-select mr-sm-2"
+                    asp-items="@Model.Categories">
+                <option value="">Please Select</option>
+            </select>
+            <span asp-validation-for="CategoryName" class="text-danger"></span>
+        </div>
+    </div>*@
+    <div class="form-group">
+        <label asp-for="Dosage"></label>
+        <input class="form-control" asp-for="Dosage" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input asp-for="Photo" class="custom-file-input form-control">
+                <label class="custom-file-label">Click here to change photo</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row col-sm-4 offset-4">
+        <img class="imageThumbnail" src="@photoPath" asp-append-version="true" />
+    </div>
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Monday</th>
+                    <th scope="col">Tuesday</th>
+                    <th scope="col">Wednesday</th>
+                    <th scope="col">Thursday</th>
+                    <th scope="col">Friday</th>
+                    <th scope="col">Saturday</th>
+                    <th scope="col">Sunday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("MondayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("TuesdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("WednesdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("ThursdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("FridayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("SaturdayMorn", false)</td>
+                    <td>@Html.Label("Morning")&nbsp;@Html.CheckBox("SundayMorn", false)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("MondayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("TuesdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("WednesdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("ThursdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("FridayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("SaturdayAfter", false)</td>
+                    <td>@Html.Label("Afternoon")&nbsp;@Html.CheckBox("SundayAfter", false)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("MondayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("TuesdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("WednesdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("ThursdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("FridayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("SaturdayEve", false)</td>
+                    <td>@Html.Label("Evening")&nbsp;@Html.CheckBox("SundayEve", false)</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-controller="medication" asp-action="index"
+               class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                })
+            });
+        </script>
+    }
 </form>

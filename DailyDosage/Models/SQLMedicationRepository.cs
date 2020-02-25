@@ -13,6 +13,7 @@ namespace DailyDosage.Models
         {
             this.context = context;
         }
+
         public Medication Add(Medication medication)
         {
             context.Medications.Add(medication);
@@ -41,6 +42,7 @@ namespace DailyDosage.Models
             return context.Medications.Find(Id);
         }
 
+       
         public Medication Update(Medication medicationChanges)
         {
             var medication = context.Medications.Attach(medicationChanges);
